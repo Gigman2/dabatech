@@ -1,0 +1,7 @@
+.auth-box{
+    width: 500px;
+    border: 1px solid silver;
+    min-width: 500px;
+    border-radius: 20px;
+    padding: 20px;
+}
