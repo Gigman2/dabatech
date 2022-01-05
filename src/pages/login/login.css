@@ -1,7 +1,73 @@
 .auth-box{
     width: 500px;
-    border: 1px solid silver;
+    border: 1px solid #BDBDBD;
     min-width: 500px;
     border-radius: 20px;
-    padding: 20px;
+    padding: 50px;
+    box-sizing: border-box;
+}
+.auth-box .logo-box{
+    width: 150px;
+    height: 30px;
+    background-color: silver;
+}
+
+.auth-box h4{
+    font-weight: 550;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+.auth-box p{
+    margin-bottom: 30px;
+}
+
+.auth-box .input-group{
+    border: 1px solid #BDBDBD;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 3px 10px;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.auth-box .input-group input{
+    border: none;
+    height: 36px;
+    outline: none;
+    width: 100%;
+}
+
+.auth-box .btn-primary{
+    color: white;
+    text-align: center;
+    background-color: #2F80ED;
+    border-radius: 8px;
+    height: 38px;
+    line-height: 37px;
+}
+
+.auth-box .social-option{
+    text-align: center;
+    color: #828282;
+    font-size: 14px;
+    margin-top: 30px;
+}
+
+.social-option-wrapper{
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.auth-box .social-icons{
+    width: 230px;
+    display: flex;
+    justify-content: space-between;
+}
+.auth-box .social-icons .icon{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #828282;
 }
