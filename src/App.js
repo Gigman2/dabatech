@@ -1,16 +1,20 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import Login from './pages/login/login'
+import Login from './pages/auth/login'
+import Register from './pages/auth/register'
+import Dashboard from './pages/dashboard/home';
+import AccountEdit from './pages/dashboard/edit';
 
 function App() {
   return (
     <BrowserRouter>
-      <div className='layout'>
       <Routes>
-         <Route path="/" element={<Login />} />
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/edit" element={<AccountEdit />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
-      </div>
     </BrowserRouter>
   );
 }

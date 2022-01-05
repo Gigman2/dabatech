@@ -1,14 +1,17 @@
 .auth-box{
     width: 500px;
-    border: 1px solid #BDBDBD;
     min-width: 500px;
+}
+.auth-box-inner{
+    border: 1px solid #BDBDBD;
     border-radius: 20px;
     padding: 50px;
     box-sizing: border-box;
 }
 .auth-box .logo-box{
     width: 150px;
-    height: 30px;
+    height: 40px;
+    margin-bottom: 20px;
     background-color: silver;
 }
 
@@ -29,6 +32,8 @@
     padding: 3px 10px;
     font-size: 18px;
     margin-bottom: 15px;
+    display: flex;
+    color: #828282
 }
 
 .auth-box .input-group input{
@@ -38,6 +43,10 @@
     width: 100%;
 }
 
+.auth-box .input-group span{
+    margin-top: 7px;
+    margin-right: 7px;
+}
 .auth-box .btn-primary{
     color: white;
     text-align: center;
@@ -55,7 +64,7 @@
 }
 
 .social-option-wrapper{
-    margin-top: 40px;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
 }
@@ -64,10 +73,26 @@
     width: 230px;
     display: flex;
     justify-content: space-between;
+    color: #828282;
 }
 .auth-box .social-icons .icon{
     width: 40px;
     height: 40px;
     border-radius: 50%;
     border: 1px solid #828282;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-box .footer{
+    color: #828282;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+.auth-box-inner .footer a {
+    color: #2F80ED;
+    text-decoration: none;
 }
