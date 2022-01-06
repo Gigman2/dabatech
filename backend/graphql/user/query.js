@@ -1,17 +1,15 @@
 var { GraphQLString } = require('graphql')
 const { UserSchema } = require("../../models/user");
-
+const CheckAuth = require('../../utils/check-auth')
 var {userType} = require('../types')
-
 
 const Query = {
     getUser: {
         type: userType,
-        args: {
-            id: { type: GraphQLString }
-        },
-        resolve: async (_, {id}) => {
-            return await UserSchema.findById(id)
+        args: {},
+        resolve: async (_, {}, context) => {
+            let authUser = CheckAuth(context)
+            return await UserSchema.findById(authUser.id)
         }
     }
     

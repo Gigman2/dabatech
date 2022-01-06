@@ -20,15 +20,15 @@ const Mutation = {
                 throw ClientError({errors})
             }
             const user = await UserSchema.findOne({email})
-            if(!user){
-                errors.general = 'Account not found'
-                throw ClientError({errors})
-            }
+            // if(!user){
+            //     errors.general = 'Account not found'
+            //     throw ClientError({errors})
+            // }
           
-              return {
-                ...user._doc,
-                id: user._id,
-              }
+            return {
+            ...user._doc,
+            id: user._id,
+            }
         }
     }
     

@@ -1,4 +1,4 @@
-const { jwt } = require("jsonwebtoken")
+const jwt = require("jsonwebtoken")
 const config= require("../config")
 const {AuthError} = require('../config/errorHandler')
 
@@ -11,6 +11,7 @@ module.exports = (context) => {
                 const user = jwt.verify(token, config.development.secret)
                 return user
             } catch (err){
+                console.log(err)
                 throw  AuthError('Invalid/Expired token')
             }
         }

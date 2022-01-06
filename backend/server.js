@@ -22,7 +22,7 @@ app.use(
     "/graphql",
     graphqlHTTP((request) => {
         return {
-            context: {startTime: Date.now()},
+            context: {req: request},
             graphiql: true,
             schema: graphqlSchema,
         }
