@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const {composeWithMongoose} = require("graphql-compose-mongoose")
 const Schema = mongoose.Schema
 
 const User = new Schema({
@@ -12,8 +11,8 @@ const User = new Schema({
     email: {
         type: String
     },
-    photo: {
-        type: Number
+    phone: {
+        type: String
     },
     password: {
         type: String
@@ -27,6 +26,5 @@ const User = new Schema({
 });
 
 module.exports = {
-    UserSchema: mongoose.model("users", User),
-    UserTC: composeWithMongoose(mongoose.model("user", User))
+    UserSchema: mongoose.model("users", User)
 }

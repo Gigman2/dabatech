@@ -1,16 +1,29 @@
-const { SchemaComposer } = require( 'graphql-compose');
+var { GraphQLSchema, GraphQLObjectType } = require('graphql')
+const UserQuery = require('../graphql/user/query')
+const UserMutation = require('../graphql/user/mutation')
+const AuthMutation = require('../graphql/auth/mutation')
 
+// Define the Query type
+var Query = new GraphQLObjectType({
+    name: 'Query',
+    fields: {
+      ...UserQuery
+    }
+  });
 
-const schemaComposer = new SchemaComposer();
+  var Mutation = new GraphQLObjectType({
+    name: 'Mutation',
+    fields: {
+        ...AuthMutation,
+        ...UserMutation
+    }
+  });
 
-const { UserQuery, UserMutation } =require ('./user');
+let schema = new GraphQLSchema(
+    {
+        query: Query,
+        mutation: Mutation
+    }
+)
 
-schemaComposer.Query.addFields({
-    ...UserQuery,
-});
-
-schemaComposer.Mutation.addFields({
-    ...UserMutation,
-});
-
-module.exports = schemaComposer.buildSchema();
+module.exports = schema
