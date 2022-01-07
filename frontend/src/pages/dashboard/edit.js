@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
 import DashboardLayout from '../../components/Layouts/DashboardLayout';
 import ChevronRight from '@material-ui/icons/ChevronLeft'
+import Camera from '@material-ui/icons/CameraAlt'
+import { useMutation } from '@apollo/react-hooks';
+import { GET_USER } from "../../utils/queries";
 
 import './dashboard.css'
 
@@ -20,7 +23,10 @@ const AccountEdit = props => {
                         <form>
                             <label for="avatar" className='update-avatar'>
                                 <input type="file" id="avatar"/>
-                                <div className='select'></div>
+                                <div className='select'>
+                                    <img src={''} />
+                                    <span ><Camera /></span>
+                                </div>
                                 <div className='text'>Change Photo</div>
                             </label>
                             <div className='form-group'>

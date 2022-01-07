@@ -1,7 +1,13 @@
 import DashboardLayout from '../../components/Layouts/DashboardLayout';
+import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@apollo/react-hooks';
+import { GET_USER } from "../../utils/queries";
+
 import './dashboard.css'
 
 const Dashboard = props => {
+    const { loading, error, data } = useQuery(GET_USER);
+    const navigate = useNavigate()
     return (
         <DashboardLayout>
             <div className='page-head'>
@@ -14,8 +20,11 @@ const Dashboard = props => {
                         <div>
                             <h4>Profile</h4>
                             <h6>Some info may be visible to other people</h6>
+                            <div className='alert-info-box'>Your profile is not complete Click edit to update</div>
                         </div>
-                        <div className='btn-outline'>Edit</div>
+                        <div>
+                            <div className='btn-outline' onClick={() => navigate('/edit')}>Edit</div>
+                        </div>
                     </div>
                     <div className='page-card-body info-box'>
                         <div className='info-item'>
@@ -24,19 +33,19 @@ const Dashboard = props => {
                         </div>
                         <div className='info-item'>
                             <div className='title'>Name</div>
-                            <div className="content">Xanter Neal</div>
+                            <div className="content">{data?.getUser?.name ? data?.getUser?.name:' -- '}</div>
                         </div>
                         <div className='info-item'>
                             <div className='title'>Bio</div>
-                            <div className="content">I am a software developer and a big fan of devchallenges...</div>
+                            <div className="content">{data?.getUser?.bio ? data?.getUser?.bio:' -- '}</div>
                         </div>
                         <div className='info-item'>
                             <div className='title'>Phone</div>
-                            <div className="content">908249274292</div>
+                            <div className="content">{data?.getUser?.phone ? data?.getUser?.phone:' -- '}</div>
                         </div>
                         <div className='info-item'>
                             <div className='title'>Email</div>
-                            <div className="content">xanthe.neal@gmail.com</div>
+                            <div className="content">{data?.getUser?.email ? data?.getUser?.email:' -- '}</div>
                         </div>
                         <div className='info-item'>
                             <div className='title'>Password</div>

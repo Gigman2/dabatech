@@ -41,6 +41,7 @@
     height: 36px;
     outline: none;
     width: 100%;
+    background-color: white;
 }
 
 .auth-box .input-group span{
@@ -54,6 +55,7 @@
     border-radius: 8px;
     height: 38px;
     line-height: 37px;
+    cursor: pointer;
 }
 
 .auth-box .social-option{

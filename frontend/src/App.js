@@ -1,21 +1,31 @@
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter} from 'react-router-dom'
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { AuthContextProvider } from './context/useAuth'
+import Pages from './routes'
 
-import Login from './pages/auth/login'
-import Register from './pages/auth/register'
-import Dashboard from './pages/dashboard/home';
-import AccountEdit from './pages/dashboard/edit';
+const client = new ApolloClient({
+  uri: 'http://localhost:5000/graphql',
+  request: async operation => {
+    const token = sessionStorage.getItem('dt_token');
+    operation.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : ''
+      }
+    });
+  }
+});
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/edit" element={<AccountEdit />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
-    </BrowserRouter>
+    <ApolloProvider client={client}>
+      <BrowserRouter>
+        <AuthContextProvider>
+          <Pages />
+        </AuthContextProvider>
+      </BrowserRouter>
+    </ApolloProvider>
   );
 }
 
