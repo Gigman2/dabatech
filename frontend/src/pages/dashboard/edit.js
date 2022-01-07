@@ -140,7 +140,7 @@ const AccountEdit = props => {
                                 <label>Password</label>
                                 <input  placeholder='Enter you password...'/>
                             </div>
-                            <div className='form-btn' onClick={handleSubmit} >{!isSubmitting || !loading? 'Save' : ''}</div>
+                            <div className='form-btn' onClick={handleSubmit} >{!isSubmitting || !loading? 'Save' : 'Saving ...'}</div>
                         </form>
                     </div>
                    
