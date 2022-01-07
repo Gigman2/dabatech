@@ -35,12 +35,13 @@ export const LOGIN = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation($email: String, $phone: String, $name: String, $bio: String,) {
-    updateUser (payload:{email: $email, phone: $phone, name: $name, bio: $bio}){
+  mutation($email: String, $phone: String, $name: String, $bio: String, $file: Upload) {
+    updateUser (payload:{email: $email, phone: $phone, name: $name, bio: $bio, file: $file}){
       name
       email
       phone,
-      bio
+      bio,
+      avatar
     }
   }
 `;

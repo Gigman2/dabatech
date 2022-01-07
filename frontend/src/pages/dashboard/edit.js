@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import DashboardLayout from '../../components/Layouts/DashboardLayout';
 import ChevronRight from '@material-ui/icons/ChevronLeft'
@@ -11,7 +12,7 @@ import './dashboard.css'
 const AccountEdit = props => {
     const [update, {data, loading}] = useMutation(UPDATE_USER);
     const { loading: userLoading, error:userError, data:userData } = useQuery(GET_USER, {fetchPolicy: "no-cache"});
-
+    const [image, setImage] = useState('')
     
     const formik = useFormik({
         initialValues: {
@@ -19,13 +20,24 @@ const AccountEdit = props => {
           name: userData?.getUser?.name || '',
           phone: userData?.getUser?.phone || '',
           bio: userData?.getUser?.bio || '',
+          password: '',
+          file: ''
         },
         enableReinitialize: true,
         onSubmit: async (val, { setSubmitting }) => {
-          
           try {
             setSubmitting(true)
-            update({ variables: { email: val.email, name: val.name, phone: val.phone, bio: val.bio }})
+            let payload = {  
+                email: val.email, 
+                name: val.name, 
+                phone: val.phone, 
+                bio: val.bio, 
+                password: val.password, 
+            }
+            if(val.file){
+                payload.file = val.file
+            }
+            update({ variables: payload})
           } catch (error) {
  
           } finally {
@@ -39,7 +51,15 @@ const AccountEdit = props => {
         handleChange,
         handleSubmit,
         isSubmitting,
+        setFieldValue
     } = formik
+
+    const processFile = (val) => {
+        let file = val.files[0]
+        let preview = URL.createObjectURL(file)
+        setImage(preview)
+        setFieldValue('file', file)
+    }
 
     return (
         <DashboardLayout>
@@ -55,9 +75,9 @@ const AccountEdit = props => {
                     <div className='page-card-body edit-box'>
                         <form>
                             <label for="avatar" className='update-avatar'>
-                                <input type="file" id="avatar"/>
+                                <input type="file" id="avatar" onChange={(e) => processFile(e.target)}/>
                                 <div className='select'>
-                                    <img src={''} />
+                                    {image !== ''? <img src={image} alt="avatar-box"/>: null}
                                     <span ><Camera /></span>
                                 </div>
                                 <div className='text'>Change Photo</div>

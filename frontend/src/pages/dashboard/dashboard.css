@@ -113,6 +113,7 @@
     border-radius: 8px;
     position: relative;
     cursor: pointer;
+    overflow: hidden;
 }
 
 .edit-box .update-avatar img{

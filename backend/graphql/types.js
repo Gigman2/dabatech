@@ -1,4 +1,5 @@
 const { GraphQLObjectType, GraphQLString, GraphQLInputObjectType } = require('graphql')
+const {GraphQLUpload} = require('graphql-upload')
 
 const User = new GraphQLObjectType({
     name: 'user',
@@ -27,7 +28,7 @@ const UserInfo = new GraphQLInputObjectType({
         email: { type: GraphQLString },
         bio: { type: GraphQLString },
         phone: { type: GraphQLString },
-        avatar: { type: GraphQLString }
+        file: { type: GraphQLUpload }
     },
 })
 
