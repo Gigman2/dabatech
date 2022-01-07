@@ -1,26 +1,27 @@
 import './App.css';
 import { BrowserRouter} from 'react-router-dom'
-import { ApolloClient, InMemoryCache, ApolloLink, concat} from '@apollo/client';
+import { ApolloClient, InMemoryCache} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { AuthContextProvider } from './context/useAuth'
 import { createUploadLink } from 'apollo-upload-client'
 import Pages from './routes'
 
-const token = sessionStorage.getItem('dt_token');
 const apolloLink = createUploadLink({ uri: "http://localhost:5000/graphql"})
-const AuthMiddleware = new ApolloLink((operation, forward) => {
-  operation.setContext(({headers = {}}) => ({
+
+const authLink = setContext((_, { headers }) => {
+  const token = sessionStorage.getItem('dt_token');
+  return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : ''
+      authorization: token ? `Bearer ${token}` : "",
     }
-  }))
-  return forward(operation);
+  }
 })
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: concat(AuthMiddleware, apolloLink)
+  link: authLink.concat(apolloLink)
 });
 
 function App() {
