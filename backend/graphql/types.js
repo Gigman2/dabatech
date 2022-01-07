@@ -20,7 +20,7 @@ const Auth = new GraphQLInputObjectType({
     },
 })
 
-const userInfo = new GraphQLInputObjectType({
+const UserInfo = new GraphQLInputObjectType({
     name: 'userInfo',
     fields: {
         name: { type: GraphQLString },
@@ -44,9 +44,10 @@ const Register = new GraphQLObjectType({
     },
 })
 
+
 module.exports = {
     userType: User,
     authType: Auth,
     registerType: Register,
-    userInfoType: userInfo
+    userInfoType: UserInfo
 }
