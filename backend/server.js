@@ -1,11 +1,13 @@
 const express = require("express");
+var cors = require('cors')
+
 const app = express();
 const mongoose = require("mongoose")
 const {graphqlHTTP} = require('express-graphql')
 const logger = require('./core/logger');
 const config = require('./config/index.js')
 
-
+app.use(cors())
 app.listen(5000, async () => {
     await mongoose.connect(config.development.dbString, {
         useNewUrlParser: true,
