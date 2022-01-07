@@ -18,7 +18,6 @@ const Login = props => {
     const [register, {data, loading}] = useMutation(LOGIN);
 
     useEffect(() => {
-        console.log(data)
         if(data !== undefined){
             let token = data.login.token
             delete data.login.token
@@ -40,7 +39,6 @@ const Login = props => {
         },
         enableReinitialize: true,
         onSubmit: async (val, { setSubmitting }) => {
-          console.log(val)
           
           try {
             setSubmitting(true)

@@ -13,8 +13,6 @@ function PrivateRoute({ children, ...rest }) {
     const { isAuthenticated } = useAuth()
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    console.log(isAuthenticated())
-    console.log(_.isEmpty(isAuthenticated()))
     useEffect(() => {
         if(!_.isEmpty(isAuthenticated() || {}) && !_.isEmpty(isAuthenticated()?.user || {})){
             setIsLoggedIn(true)

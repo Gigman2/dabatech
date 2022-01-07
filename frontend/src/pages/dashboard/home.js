@@ -6,7 +6,8 @@ import { GET_USER } from "../../utils/queries";
 import './dashboard.css'
 
 const Dashboard = props => {
-    const { loading, error, data } = useQuery(GET_USER);
+    const { loading, error, data } = useQuery(GET_USER,{fetchPolicy: "no-cache"});
+    
     const navigate = useNavigate()
     return (
         <DashboardLayout>
@@ -20,7 +21,7 @@ const Dashboard = props => {
                         <div>
                             <h4>Profile</h4>
                             <h6>Some info may be visible to other people</h6>
-                            <div className='alert-info-box'>Your profile is not complete Click edit to update</div>
+                            {!(data?.getUser?.name && data?.getUser?.phone ) && <div className='alert-info-box'>Your profile is not complete Click edit to update</div>}
                         </div>
                         <div>
                             <div className='btn-outline' onClick={() => navigate('/edit')}>Edit</div>
@@ -29,7 +30,9 @@ const Dashboard = props => {
                     <div className='page-card-body info-box'>
                         <div className='info-item'>
                             <div className='title'>Photo</div>
-                            <div className='avatar'></div>
+                            <div className='avatar'>
+                                 <img src={data?.getUser?.avatar ? data?.getUser?.avatar : "./avatar.png" } alt="avatar-images" />
+                            </div>
                         </div>
                         <div className='info-item'>
                             <div className='title'>Name</div>
