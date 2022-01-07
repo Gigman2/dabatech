@@ -1,10 +1,11 @@
+const {UserInputError} = require('apollo-server-express')
 const AuthError = error => new Error(JSON.stringify({
     success: false,
     code: 401,
     error
 }));
 
-const clientError = error => new Error(JSON.stringify({
+const clientError = error => new UserInputError(JSON.stringify({
     success: false,
     code: 400,
     error

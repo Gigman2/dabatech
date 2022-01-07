@@ -9,7 +9,15 @@ const Query = {
         args: {},
         resolve: async (_, {}, context) => {
             let authUser = CheckAuth(context)
-            return await UserSchema.findById(authUser.id)
+            let user = await UserSchema.findById(authUser.id)
+            if(user){
+                let data = JSON.parse(JSON.stringify(user))
+                data.avatar = data.avatar.split('/')
+                let avatar = data.avatar[1]+'/'+data.avatar[2]
+                data.avatar = avatar
+                return data
+            }
+            return {}
         }
     }
     
