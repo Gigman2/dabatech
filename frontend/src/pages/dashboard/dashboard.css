@@ -177,3 +177,29 @@
     border-radius: 5px;
     color: white;
 }
+
+@media screen and (max-width: 500px){
+    .navbar{
+        padding: 0 10px !important;
+    }
+
+    .navbar-user{
+        justify-content: end;
+    }
+
+    .navbar .logo-box{
+        width: 130px
+    }
+
+    .navbar-user .user-box{
+        display: none;
+    }
+
+    .page-head h3{
+        font-size: 1.7em;
+    }
+
+    .page-head h5{
+        font-size: 1.1em;
+    }
+}

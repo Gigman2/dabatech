@@ -33,6 +33,11 @@
     width: 100%;
 }
 
+.navbar-user .user-box{
+    display: flex;
+    align-items: center;
+}
+
 .navbar .avatar-box-dialog{
     position: absolute;
     right: 70px;
@@ -70,4 +75,29 @@
 .navbar .avatar-box-dialog span{
     margin-left: 10px;
     font-size: .95em;
+}
+
+@media screen and (max-width: 500px){
+    .dashboard-layout{
+        padding: 10px;
+    }
+    .page-card{
+        width: 100% !important
+    }
+
+    .page-card-inner{
+        border: none !important;
+    }
+
+    .page-card-header{
+        padding: 20px 0 !important;
+        border-bottom: none !important
+    }
+    .info-item{
+        padding:15px 0 !important;
+        justify-content: space-between;
+    }
+    .info-item .title {
+        width: 100px !important
+    }
 }

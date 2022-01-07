@@ -16,10 +16,12 @@ const DashboardLayout = ({children}) => {
                 <div className="logo-box"></div>
                 <div className="navbar-user">
                     <div className="avatar-box">
-                        <img src={user?.avatar ? user?.avatar : "./avatar.png" } alt="avatar-images" />
+                        <img src={user?.avatar ? 'http://localhost:5000/'+user?.avatar : "./avatar.png" } alt="avatar-images" />
                     </div>
-                    <div>{!user?.name ? 'Guest' : user?.name}</div>
-                    <div style={{cursor: 'pointer', marginTop: '8px'}} onClick={() => setOpen(!open)}>{open ? <MenuUp /> : <MenuDown />}</div>
+                    <div className='user-box'>
+                        <div>{!user?.name ? 'Guest' : user?.name}</div>
+                        <div style={{cursor: 'pointer', marginTop: '8px'}} onClick={() => setOpen(!open)}>{open ? <MenuUp /> : <MenuDown />}</div>
+                    </div>
                 </div>
                {open &&  <div className='avatar-box-dialog'>
                     <div className='item active'> <AccountCircle /> <span>My Profile</span></div>

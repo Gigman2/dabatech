@@ -22,7 +22,7 @@
 }
 
 .auth-box p{
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .auth-box .input-group{
@@ -97,4 +97,25 @@
 .auth-box-inner .footer a {
     color: #2F80ED;
     text-decoration: none;
+}
+
+@media screen and (max-width: 500px){
+    .layout{
+        margin: 10px !important;
+    }
+
+    .auth-box{
+        width: 100%;
+        min-width: 100%;
+        margin: 10px;
+        position: relative;
+    }
+
+    .auth-box-inner{
+        border: none;
+        padding: 10px;
+    }
+    .box-footer{
+        margin-top: 40px;
+    }
 }

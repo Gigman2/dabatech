@@ -12,6 +12,7 @@ export const AuthContextProvider = ({ children }) => {
       let mounted = true
       if (!session && mounted) return logout(true)
       return () => (mounted = false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [session])
   
     const store = ({ token, user: individual}) => {

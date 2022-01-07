@@ -6,7 +6,7 @@ import { GET_USER } from "../../utils/queries";
 import './dashboard.css'
 
 const Dashboard = props => {
-    const { loading, error, data } = useQuery(GET_USER,{fetchPolicy: "no-cache"});
+    const { data } = useQuery(GET_USER,{fetchPolicy: "no-cache"});
     
     const navigate = useNavigate()
     return (
@@ -31,7 +31,7 @@ const Dashboard = props => {
                         <div className='info-item'>
                             <div className='title'>Photo</div>
                             <div className='avatar'>
-                                 <img src={data?.getUser?.avatar ? data?.getUser?.avatar : "./avatar.png" } alt="avatar-images" />
+                                 <img src={data?.getUser?.avatar ? 'http://localhost:5000/'+data?.getUser?.avatar : "./avatar.png" } alt="avatar-images" />
                             </div>
                         </div>
                         <div className='info-item'>

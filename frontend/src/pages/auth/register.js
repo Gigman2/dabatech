@@ -1,5 +1,5 @@
 import './auth.css'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {Link, useNavigate } from 'react-router-dom'
 import MailIcon from '@material-ui/icons/Mail';
 import LockIcon from '@material-ui/icons/Lock'
@@ -17,17 +17,9 @@ import GithubIcon from '@material-ui/icons/GitHub'
 const Register = props => {
     const { store } = useAuth()
     const navigate = useNavigate();
-    const [register, {data, loading}] = useMutation(REGISTER);
+    const [register] = useMutation(REGISTER);
+    const [formError, setFormError] = useState(null)
 
-    useEffect(() => {
-        if(data !== undefined){
-            let token = data.register.token
-            delete data.register.token
-            let user = data.register
-            store({token, user})
-            navigate("/edit")
-        }
-    }, [data])
 
     const formik = useFormik({
         initialValues: {
@@ -36,14 +28,22 @@ const Register = props => {
         },
         enableReinitialize: true,
         onSubmit: async (val, { setSubmitting }) => {
-          
           try {
             setSubmitting(true)
-            register({ variables: { email: val.email, password: val.password }})
+            const {data} = await register({ variables: { email: val.email, password: val.password }})
+            let token = data.register.token
+            delete data.register.token
+            let user = data.register
+            store({token, user})
+            navigate("/edit")
           } catch (error) {
- 
+            if(error){
+                console.log(error.message)
+                let msg = JSON.parse(error?.message)
+                setFormError(msg.error)
+              }
           } finally {
-            // setSubmitting(false)
+            setSubmitting(false)
           }
         }
     })
@@ -62,6 +62,9 @@ const Register = props => {
                     <div className='logo-box'></div>
                     <h4>Join thousands of learners from around the world </h4>
                     <p>Master web development by making real-life projects. There are multiple paths for you to choose</p>
+                   {formError && <div className='errorBox'>
+                         <div>{`${formError}`}</div>
+                    </div>}
                     <form>
                         <div className='input-group'>
                             <span><MailIcon /></span>
@@ -86,7 +89,7 @@ const Register = props => {
                             />
                         </div>
                     </form>
-                    <div className='btn-primary' onClick={handleSubmit} disabled={isSubmitting || loading} >{isSubmitting|| loading ? 'Registering ... ' : 'Start coding now'}</div>
+                    <div className='btn-primary' onClick={handleSubmit} disabled={isSubmitting} >{isSubmitting ? 'Registering ... ' : 'Start coding now'}</div>
                     <div className='social-option'>or continue with these social profile</div>
                     <div className='social-option-wrapper'>
                         <div className='social-icons'>

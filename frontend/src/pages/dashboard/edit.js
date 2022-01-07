@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import toast, {Toaster} from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import useAuth from '../../context/useAuth'
 import DashboardLayout from '../../components/Layouts/DashboardLayout';
 import ChevronRight from '@material-ui/icons/ChevronLeft'
 import Camera from '@material-ui/icons/CameraAlt'
@@ -10,10 +12,19 @@ import { useFormik } from 'formik'
 import './dashboard.css'
 
 const AccountEdit = props => {
-    const [update, {data, loading}] = useMutation(UPDATE_USER);
-    const { loading: userLoading, error:userError, data:userData } = useQuery(GET_USER, {fetchPolicy: "no-cache"});
+    const { store } = useAuth()
+    const [update, {loading}] = useMutation(UPDATE_USER);
+    const { data:userData } = useQuery(GET_USER, {fetchPolicy: "no-cache"});
     const [image, setImage] = useState('')
     
+    useEffect(() => {
+        if(userData){
+           store({user: userData.getUser})
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userData])
+
+
     const formik = useFormik({
         initialValues: {
           email: userData?.getUser?.email || '',
@@ -37,7 +48,8 @@ const AccountEdit = props => {
             if(val.file){
                 payload.file = val.file
             }
-            update({ variables: payload})
+            await update({ variables: payload})
+            toast.success('Your info has been updated')
           } catch (error) {
  
           } finally {
@@ -63,6 +75,7 @@ const AccountEdit = props => {
 
     return (
         <DashboardLayout>
+            <Toaster  position="top-center"/>
             <div className='page-card'>
                 <Link to={'/'}><div className='breadcrumb'><ChevronRight /> Back</div></Link>
                 <div className='page-card-inner'>
@@ -77,7 +90,7 @@ const AccountEdit = props => {
                             <label for="avatar" className='update-avatar'>
                                 <input type="file" id="avatar" onChange={(e) => processFile(e.target)}/>
                                 <div className='select'>
-                                    {image !== ''? <img src={image} alt="avatar-box"/>: null}
+                                    {userData?.getUser?.avatar ? <img src={image || 'http://localhost:5000/'+userData?.getUser?.avatar} alt="avatar-box"/>: null}
                                     <span ><Camera /></span>
                                 </div>
                                 <div className='text'>Change Photo</div>

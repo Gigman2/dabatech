@@ -11,6 +11,7 @@ import AccountEdit from './pages/dashboard/edit';
 function PrivateRoute({ children, ...rest }) {
     const navigate = useNavigate()
     const { isAuthenticated } = useAuth()
+    // eslint-disable-next-line no-unused-vars
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
@@ -19,6 +20,7 @@ function PrivateRoute({ children, ...rest }) {
         }else{
             navigate('/login')
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAuthenticated])
 
     return (

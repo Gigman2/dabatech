@@ -22,3 +22,15 @@
   align-items: center;
   margin-bottom: 30px;
 }
+
+.errorBox{
+  background-color: rgba(255, 112, 112, 0.418);
+  border-radius: 8px;
+  padding: 8px 15px;
+  margin-bottom: 5px;
+  color: rgb(212, 71, 71)
+}
+
+.errorBox span{
+  text-transform: capitalize;
+}
