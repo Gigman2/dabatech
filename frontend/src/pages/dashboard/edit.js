@@ -90,7 +90,8 @@ const AccountEdit = props => {
                             <label for="avatar" className='update-avatar'>
                                 <input type="file" id="avatar" onChange={(e) => processFile(e.target)}/>
                                 <div className='select'>
-                                    {userData?.getUser?.avatar ? <img src={image || 'http://localhost:5000/'+userData?.getUser?.avatar} alt="avatar-box"/>: null}
+                                    {userData?.getUser?.avatar || image ?
+                                         <img src={image || 'http://localhost:5000/'+userData?.getUser?.avatar} alt="avatar-box"/>: null}
                                     <span ><Camera /></span>
                                 </div>
                                 <div className='text'>Change Photo</div>
